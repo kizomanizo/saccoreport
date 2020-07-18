@@ -1,0 +1,54 @@
+extends layout
+
+block content
+    div(class="container")
+        h2 #{title}
+        p Batch Number: #{batch}
+        div(class="row")
+            div(class="col-lg")
+            table(class="table")
+                thead
+                    tr
+                        th(scope="col") ID
+                        th(scope="col") First Name
+                        th(scope="col") Middle Name
+                        th(scope="col") Last Name
+                        th(scope="col") Transaction
+                        th(scope="col") Amount
+                        th(scope="col") Uploaded At
+                tbody
+                    each dump in dumps
+                        tr
+                            th(scope="row")= dump.memberNumber
+                            td= dump.firstName
+                            td= dump.middleName
+                            td= dump.lastName
+                            td= dump.transaction
+                            td= dump.amount
+                            td= dump.createdAt
+        a(href="#") Process Entries | 
+        a(href="/users/logout") Logout
+
+        div(class="row")
+            block content
+                .row
+                nav(aria-label='Page navigation').d-flex.justify-content-center
+                    ul.pagination
+                        if currentPage > 1
+                            li.page-item
+                                a.page-link(href=`/users/dump?page=${currentPage - 1}`) Previous
+
+                        //- if pagesCount < 10
+                        - var i = 1;
+                            while i <= pagesCount
+                                li.page-item
+                                    a.page-link(href=`/users/dump?page=${i}`)= i++
+                        //- else
+                        //-     -var i = currentPage - 3
+                        //-     while i >= 1 && i <= currentPage
+                        //-         li.page-item
+                        //-             a.page-link(href=`/users/dump?page=${i}`)= i++
+
+                        if currentPage < pagesCount
+                            li.page-item
+                                a.page-link(href=`/users/dump?page=${parseInt(currentPage) + 1}`) Next

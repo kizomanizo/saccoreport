@@ -1,0 +1,15 @@
+html
+    head
+        title Login
+        link(rel='stylesheet', href='/stylesheets/loginstyle.css')
+    body
+        div(class="login-page")
+            div(class="form")
+                if error
+                    p(class="error") #{error}                   
+                form(class="login-form" action="/users/login" method="POST")
+                    input(type="text" placeholder="Username" name="username" required)
+                    input(type="password" placeholder="Password" name="password" required)
+                    button(type="submit") Sign In
+                    p(class="message") Not Registered? | 
+                        a(href="#") Create an Account

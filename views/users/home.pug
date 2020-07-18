@@ -1,0 +1,41 @@
+extends layout
+
+block content
+    div(class="container")
+        h2 #{title}
+        p
+            a(href="/users/upload") Import Users
+        div(class="row")
+            div(class="col-lg")
+            table(class="table")
+                thead
+                    tr
+                        th(scope="col") ID
+                        th(scope="col") Full Name
+                        th(scope="col") Username
+                        th(scope="col") Email
+                        th(scope="col") Loan
+                        th(scope="col") Fines
+                        th(scope="col") Savings
+                        th(scope="col") Shares
+                        th(scope="col") Edit
+                        th(scope="col") View
+                tbody
+                    each user in users
+                        tr
+                            th(scope="row")= user.id
+                            td= user.fullName
+                            td= user.username
+                            td= user.email
+                            td 120,000
+                            td 2,000
+                            td 319,800
+                            td 2,190,000
+                            td
+                                a(href="/users/edit/") Edit
+                            td
+                                if 0 == 0
+                                    a(href='/users/view/') View
+                                else
+                                    a(class="btn-link disabled" href='/users/view/') Viewed
+        a(href="/users/logout") Logout

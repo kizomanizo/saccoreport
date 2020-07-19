@@ -3,7 +3,12 @@ extends layout
 block content
     div(class="container")
         h2 #{title}
-        p Batch Number: #{batch}
+        div(class="row")
+            div(class="col-sm")
+                p Batch Number: #{batch}
+        div(class="row")
+            div(class="col-lg")
+                a(class="btn btn-secondary btn-lg btn-block" href="#" role="button") Process Entries
         div(class="row")
             div(class="col-lg")
             table(class="table")
@@ -27,30 +32,31 @@ block content
                             td= dump.transaction
                             td= dump.amount
                             td= moment(dump.createdAt).format('DD-MMM, YYYY')
-        a(href="#") Process Entries | 
-        a(href="/users/logout") Logout
-
+        //- a(href="#") Process Entries |
         div(class="row")
-            block content
-                .row
-                nav(aria-label='Page navigation').d-flex.justify-content-center
-                    ul.pagination
-                        if currentPage > 1
-                            li.page-item
-                                a.page-link(href=`/users/dump?page=${currentPage - 1}`) Previous
-
-                        //- if pagesCount < 20
-                        - var i = 1;
-                        - var j = 10;
-                            while i <= pagesCount && i < 21
+            div(class="col-sm-3")
+                a(class="btn btn-danger" href="/users/logout" role="button") Logout
+            div(class="col-sm-6")
+                block content
+                    .row
+                    nav(aria-label='Page navigation').d-flex.justify-content-center
+                        ul.pagination
+                            if currentPage > 1
                                 li.page-item
-                                    a.page-link(href=`/users/dump?page=${i}`)= i++
-                        //- else
-                        //-     - var i = currentPage - 3
-                        //-     while i >= 1 && i <= currentPage
-                        //-         li.page-item
-                        //-             a.page-link(href=`/users/dump?page=${i}`)= i++
+                                    a.page-link(href=`/users/dump?page=${currentPage - 1}`) Previous
 
-                        if currentPage < pagesCount
-                            li.page-item
-                                a.page-link(href=`/users/dump?page=${parseInt(currentPage) + 1}`) Next
+                            //- if pagesCount < 20
+                            - var i = 1;
+                            - var j = 10;
+                                while i <= pagesCount && i < 21
+                                    li.page-item
+                                        a.page-link(href=`/users/dump?page=${i}`)= i++
+                            //- else
+                            //-     - var i = currentPage - 3
+                            //-     while i >= 1 && i <= currentPage
+                            //-         li.page-item
+                            //-             a.page-link(href=`/users/dump?page=${i}`)= i++
+
+                            if currentPage < pagesCount
+                                li.page-item
+                                    a.page-link(href=`/users/dump?page=${parseInt(currentPage) + 1}`) Next

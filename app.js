@@ -38,4 +38,6 @@ app.use(function(err, req, res, next) {
   res.render('users/error');
 });
 
+app.locals.moment = require('moment');
+
 module.exports = app;

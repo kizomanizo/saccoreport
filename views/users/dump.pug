@@ -17,6 +17,7 @@ block content
                         th(scope="col") Amount
                         th(scope="col") Uploaded At
                 tbody
+                    //- -var moment = require('moment')
                     each dump in dumps
                         tr
                             th(scope="row")= dump.memberNumber
@@ -25,7 +26,7 @@ block content
                             td= dump.lastName
                             td= dump.transaction
                             td= dump.amount
-                            td= dump.createdAt
+                            td= moment(dump.createdAt).format('DD-MMM, YYYY')
         a(href="#") Process Entries | 
         a(href="/users/logout") Logout
 
@@ -38,13 +39,14 @@ block content
                             li.page-item
                                 a.page-link(href=`/users/dump?page=${currentPage - 1}`) Previous
 
-                        //- if pagesCount < 10
+                        //- if pagesCount < 20
                         - var i = 1;
-                            while i <= pagesCount
+                        - var j = 10;
+                            while i <= pagesCount && i < 21
                                 li.page-item
                                     a.page-link(href=`/users/dump?page=${i}`)= i++
                         //- else
-                        //-     -var i = currentPage - 3
+                        //-     - var i = currentPage - 3
                         //-     while i >= 1 && i <= currentPage
                         //-         li.page-item
                         //-             a.page-link(href=`/users/dump?page=${i}`)= i++
